@@ -1,0 +1,3 @@
+- divide window among thread
+- calcul mandelbrot set pixel in each thread
+- gen the image
