@@ -23,7 +23,3 @@ Use the following keys to control the program:
     r: reset the view to the default position and zoom level
     c: cycle through the available color palettes
     p and m: increase and decrease the maximum number of iterations for the fractal calculation
-
-Credits
-
-This project was completed as a part of the curriculum at 1337 Khouribga. The minilibx library was provided by 42.
