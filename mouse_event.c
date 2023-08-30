@@ -35,8 +35,7 @@ int	mouse_hook(int keycode, int x, int y, void *tmp)
 		data->ycenter = data->ycenter - (data->h * y) / data->height;
 		ft_draw(data, data->fractol);
 	}
-	else if (keycode == 1)
-		data->julia_ptr->move += 1;
+	data->julia_ptr->move += (keycode == 1);
 	return (0);
 }
 
