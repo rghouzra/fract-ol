@@ -14,21 +14,21 @@
 
 int	mandelbrot(t_data *data)
 {
-    const int FIXED_POINT_SHIFT = 16;
-    const int FIXED_POINT_MULTIPLIER = 1 << FIXED_POINT_SHIFT;
+	double			ca;
+	double			cb;
+	t_complex		point;
+	double			temp;
 
-    int64_t ca_fixed = (int64_t)(point.a * FIXED_POINT_MULTIPLIER);
-    int64_t cb_fixed = (int64_t)(point.b * FIXED_POINT_MULTIPLIER);
-    int64_t point_a_fixed = ca_fixed;
-    int64_t point_b_fixed = cb_fixed;
-    data->iteration = 0;
-    while ((ca_fixed * ca_fixed + cb_fixed * cb_fixed) < 
-           (4 * FIXED_POINT_MULTIPLIER) && 
-           data->iteration < data->max_iteration) {
-        int64_t temp = ca_fixed;
-        ca_fixed = ((ca_fixed * ca_fixed - cb_fixed * cb_fixed) >> FIXED_POINT_SHIFT) + point_a_fixed;
-        cb_fixed = ((2 * temp * cb_fixed) >> FIXED_POINT_SHIFT) + point_b_fixed;
-        data->iteration++;
-    }
-    return ft_color(data);
+	data->iteration = 0;
+	point = ft_map(data);
+	ca = point.a;
+	cb = point.b;
+	while ((ca * ca + cb * cb) < 4 && data->iteration < data->max_iteration)
+	{
+		temp = ca;
+		ca = ((ca * ca - cb * cb) + point.a);
+		cb = (2 * temp * cb + point.b);
+		data->iteration++;
+	}
+	return (ft_color(data));
 }
