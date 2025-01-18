@@ -12,34 +12,53 @@
 
 #include "fractal.h"
 
-int	ft_color2(t_data *data, int *color);
+#include <math.h>
+#include "fractal.h"
+#include <math.h>
 
-int	ft_color(t_data *data)
+#define PI 3.14159265
+
+#include "fractal.h"
+#include <math.h>
+
+#define PI 3.14159265
+
+#include "fractal.h"
+#include <math.h>
+
+#define PI 3.14159265
+
+int ft_color(t_data *data)
 {
-	double	ratio;
-	int		color;
+    double ratio = (double)(data->iteration) / (double)data->max_iteration;
+    double hue = fmod((ratio * 360.0 + data->color * 36.0), 360.0);
+    double saturation = 1.0;
+    double value = 1.0;
 
-	color = ((data->color == 0) * 0x00955251) + ((data->color == 1) * 0x00009B77) \
-		+ ((data->color == 2) * 0x0000A170) + ((data->color == 3) *0x00FFA500);
-	ft_color2(data, &color);
-	ratio = (double)(data->iteration) / (double)data->max_iteration ;
-	return (ratio * color);
-}
+    double c = value * saturation;
+    double x = c * (1 - fabs(fmod(hue / 60.0, 2) - 1));
+    double m = value - c;
 
-int	ft_color2(t_data *data, int *color)
-{
-	if (data->color == 4)
-		*color = 0x009A8B4F;
-	if (data->color == 5)
-		*color = 0x00944743;
-	if (data->color == 6)
-		*color = 0x00B9E8EA;
-	if (data->color == 7)
-		*color = 0x0063A75A;
-	if (data->color == 8)
-	{
-		*color = BLUE_GOLD;
-		data->color = 0;
-	}
-	return (0);
+    double r, g, b;
+    if (hue < 60) {
+        r = c, g = x, b = 0;
+    } else if (hue < 120) {
+        r = x, g = c, b = 0;
+    } else if (hue < 180) {
+        r = 0, g = c, b = x;
+    } else if (hue < 240) {
+        r = 0, g = x, b = c;
+    } else if (hue < 300) {
+        r = x, g = 0, b = c;
+    } else {
+        r = c, g = 0, b = x;
+    }
+
+    r = (r + m) * 255;
+    g = (g + m) * 255;
+    b = (b + m) * 255;
+
+    int color = ((int)r << 16) | ((int)g << 8) | (int)b;
+
+    return color;
 }
