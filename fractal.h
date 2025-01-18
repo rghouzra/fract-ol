@@ -12,7 +12,7 @@
 
 #ifndef FRACTAL_H
 # define FRACTAL_H
-# include <mlx.h>
+# include "mlx.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
@@ -72,7 +72,6 @@ typedef struct s_complex
 int			scnd_keyboard_handlera(int code, t_data *env);
 char		*title_win(int option);
 int			mouse_move(int x, int y, void *data);
-void		ft_(t_data *data, int width, int height);
 void		ft_draw(t_data *data, int (*function)(t_data *data));
 int			ft_strlen(char *s);
 int			ft_color(t_data *d);
@@ -82,10 +81,8 @@ int			mouse_hook(int keycode, int x, int y, void *data);
 t_complex	ft_map(t_data *data);
 int			handle_keyboard(int code, t_data *env);
 void		ft_hook_event(t_list *fractal, t_data *data);
-int			mouse_press(int button, int x, int y, void *param);
 void		ft_putstr(char *s, int fd);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		print_circle(t_data *data, int x, int y, float radius);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			julia(t_data *data);
 void		exit_with_print(char *s);
